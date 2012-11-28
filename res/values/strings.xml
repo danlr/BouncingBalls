@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">BouncingBalls</string>
+	<string name="quit">Quit</string> 
+	<string name="new_game">New Game</string>
+	<string name="menu_help">Help</string>
+	<string name="help_message">Touch the screen and drag the arrow to adjust ball\'s speed!</string>
+	<string name="gravity_on">Use gravity</string>
+	<string name="gravity_off">No gravity</string>
+</resources>

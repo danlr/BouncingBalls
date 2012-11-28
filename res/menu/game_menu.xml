@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/new_game"
+          android:icon="@drawable/new_game"
+          android:title="@string/new_game" />
+    <item android:id="@+id/menu_help"
+          android:icon="@drawable/help"
+          android:title="@string/menu_help" />
+    <item android:id="@+id/quit"
+          android:icon="@drawable/quit"
+          android:title="@string/quit" />
+    <item android:id="@+id/gravity_onoff" android:checkableBehavior="single"
+    		android:icon="@drawable/check"
+          android:title="@string/gravity_on" />
+    
+</menu>
