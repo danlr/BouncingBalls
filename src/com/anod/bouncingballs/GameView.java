@@ -25,7 +25,12 @@ public class GameView  extends SurfaceView implements
 	public static final int RENDER_PAUSE = 3;
 	public static final int RENDER_START_SCREEN = 4;
 	
+	public static final int RENDER_BALLS_FILL = 1;
+	public static final int RENDER_BALLS_NO_FILL = 0;
+	
 	private int renderOption = RENDER_GAME;
+	
+	private int renderBallsOption = RENDER_BALLS_NO_FILL;
 	
 	//private int previousRenderOption = RENDER_START_SCREEN;
 	
@@ -231,7 +236,7 @@ public class GameView  extends SurfaceView implements
 			canvas.drawColor(Color.BLACK);
 							
 			if(isFingerDown){
-				newBall.Render(canvas);
+				newBall.Render(canvas, renderBallsOption);
 				//if(!changeNewBallSize){
 					p.setColor(newBall.getColor());
 					p.setStrokeWidth(2);
@@ -246,21 +251,13 @@ public class GameView  extends SurfaceView implements
 							(int)(newBallY + arrowLine * Math.cos(angle + arrowAngle)),
 							p);
 					canvas.drawLine(newBallX, newBallY, 
-							(int)(newBallX + arrowLine * Math.sin(angle - arrowAngle)) , 
+							(int)(newBallX + arrowLine * Math.sin(angle - arrowAngle)), 
 							(int)(newBallY + arrowLine * Math.cos(angle - arrowAngle)),
 							p);
 				//}
 			}
 			
-			box.Render(canvas); 
-			
-			//p.setColor(Color.RED);
-			//p.setTextSize(20);
-			
-			
-			//p.setColor(Color.GREEN);
-			//String statText = "High score:" + prevHighScore;
-			//canvas.drawText(statText, 15, 60, p);
+			box.Render(canvas, renderBallsOption);
 	}
 	
 	/**
@@ -281,7 +278,6 @@ public class GameView  extends SurfaceView implements
 		
 		if(ticks-prevTimeStamp>=10){  
 			if(renderOption==RENDER_GAME){
-				//Log.d(this.TAG, "game tick with time = "  + time);
 				time++;
 				box.UpdateState();
 			}else{
@@ -326,7 +322,7 @@ public class GameView  extends SurfaceView implements
 		thread.setPaused(true);
 		box = new Box(box.getW(),box.getH());
 		thread.setPaused(false);
-}
+	}
 	
 	public void PauseGame(){
 		thread.setPaused(true);
@@ -347,6 +343,10 @@ public class GameView  extends SurfaceView implements
 			box.setAx(dx);
 			box.setAy(dy);
 		}
+	}
+
+	public void SetFilling(boolean fillCircles) {
+		renderBallsOption = fillCircles ? RENDER_BALLS_FILL : RENDER_BALLS_NO_FILL;
 	}
 
 }

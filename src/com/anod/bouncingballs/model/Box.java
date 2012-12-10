@@ -27,19 +27,18 @@ public class Box {
 	}
 	
 	public static final int MAX_SPEED = 20;
-	public static final int MAX_BALLS = 16;
+	public static final int MAX_BALLS = 20;
 	public int MAX_BALL_RADIUS = 20;
 	public int MIN_BALL_RADIUS = 8;
 	
 	private Ball[] balls;
 	
 	public Box(int w, int h){
-		//balls = new ArrayList<Ball>();
 		balls = new Ball[1];
 		this.height = h;
 		this.width = w;
 		balls = new Ball[0];
-		MAX_BALL_RADIUS =  Math.min(h, w)/15;
+		MAX_BALL_RADIUS =  Math.min(h, w)/10;
 	}
 	
 	public boolean isFull(){
@@ -64,7 +63,7 @@ public class Box {
 			if(!isFull()){
 				Ball[] newBalls = new Ball[balls.length+1];
 				for(int i = 0; i < balls.length; i++){
-					newBalls[i] = new Ball(balls[i].getX(), balls[i].getY(), balls[i].getR(), balls[i].getVx(), balls[i].getVy());
+					newBalls[i] = new Ball(balls[i].getX(), balls[i].getY(), balls[i].getR(), balls[i].getVx(), balls[i].getVy(), balls[i].getColor());
 				}
 				newBalls[newBalls.length-1] = ball;
 				balls = newBalls;
@@ -160,11 +159,11 @@ public class Box {
 		}
 	}
 	
-	public void Render(Canvas canvas){
+	public void Render(Canvas canvas, int renderBallsOption){
 		//Log.d("BOX", "render");
 		synchronized(balls){
 			for (int i =0;i < balls.length; i++) {
-				balls[i].Render(canvas);
+				balls[i].Render(canvas, renderBallsOption);
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package com.anod.bouncingballs.model;
 
 import java.util.Random;
 
+import com.anod.bouncingballs.GameView;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -73,6 +75,17 @@ public class Ball {
 		this.m = 75 + rnd.nextInt(50);
 	}
 	
+	public Ball(float x, float y, int r, float vx, float vy, int colour){
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.vx = vx;
+		this.vy = vy;
+		Random rnd = new Random();
+		this.color = colour;
+		this.m = 75 + rnd.nextInt(50);
+	}
+	
 	public Ball(){
 		this.x = 1;
 		this.y = 1;
@@ -84,12 +97,21 @@ public class Ball {
 		//this.color = Color.WHITE;
 	}
 	
-	public void Render(Canvas canvas){
+	public void Render(Canvas canvas, int renderBallsOption){
 		Paint p = new Paint();
-		p.setStyle(Style.STROKE);
-		p.setStrokeMiter(3);
+		
 		p.setColor(color);
-		p.setStrokeWidth(3);
+		
+		if (renderBallsOption == GameView.RENDER_BALLS_NO_FILL){
+			p.setStyle(Style.STROKE);
+			p.setStrokeMiter(3);
+			p.setStrokeWidth(3);
+		} else if (renderBallsOption == GameView.RENDER_BALLS_FILL){
+			p.setStyle(Style.FILL_AND_STROKE);
+			p.setStrokeMiter(3);
+			p.setStrokeWidth(3);
+		}
+		
 		p.setAntiAlias(true);
 		
 		canvas.drawCircle(x, y, r, p);

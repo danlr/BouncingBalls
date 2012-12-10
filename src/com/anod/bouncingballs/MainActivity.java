@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     	super.onCreate(savedInstanceState);
     	
     	tracker = GoogleAnalyticsTracker.getInstance();
-        tracker.startNewSession("UA-36639377-2", this);
+        tracker.startNewSession("UA-36639377-2", 30, this);
     	
     	mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -150,6 +150,20 @@ public class MainActivity extends Activity implements SensorEventListener {
             	item.setChecked(true);
             	item.setTitle(R.string.gravity_on);
             	mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+            }
+
+        	return true;
+        	
+        case R.id.fillCircles_onoff:
+        	if (item.getTitle() == getString(R.string.fillCircles_on)) {
+        		item.setChecked(false);
+        		item.setTitle(R.string.fillCircles_off);
+        		gameView.SetFilling(false);
+        	}
+            else {
+            	item.setChecked(true);
+            	item.setTitle(R.string.fillCircles_on);
+            	gameView.SetFilling(true);
             }
 
         	return true;
