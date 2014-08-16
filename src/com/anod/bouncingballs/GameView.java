@@ -14,7 +14,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
+public class GameView  extends SurfaceView implements
+								SurfaceHolder.Callback {
+	
+	
 	private static final String TAG = GameView.class.getSimpleName();
 	
 	public static final int RENDER_GAME = 1;
@@ -22,7 +25,12 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 	public static final int RENDER_PAUSE = 3;
 	public static final int RENDER_START_SCREEN = 4;
 	
+	public static final int RENDER_BALLS_FILL = 1;
+	public static final int RENDER_BALLS_NO_FILL = 0;
+	
 	private int renderOption = RENDER_GAME;
+	
+	private int renderBallsOption = RENDER_BALLS_NO_FILL;
 	
 	//private int previousRenderOption = RENDER_START_SCREEN;
 	
@@ -228,7 +236,7 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 			canvas.drawColor(Color.BLACK);
 							
 			if(isFingerDown){
-				newBall.Render(canvas);
+				newBall.Render(canvas, renderBallsOption);
 				//if(!changeNewBallSize){
 					p.setColor(newBall.getColor());
 					p.setStrokeWidth(2);
@@ -243,14 +251,13 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 							(int)(newBallY + arrowLine * Math.cos(angle + arrowAngle)),
 							p);
 					canvas.drawLine(newBallX, newBallY, 
-							(int)(newBallX + arrowLine * Math.sin(angle - arrowAngle)) , 
+							(int)(newBallX + arrowLine * Math.sin(angle - arrowAngle)), 
 							(int)(newBallY + arrowLine * Math.cos(angle - arrowAngle)),
 							p);
 				//}
 			}
 			
-			box.Render(canvas); 
-			
+			box.Render(canvas, renderBallsOption);
 	}
 	
 	/**
@@ -271,7 +278,6 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 		
 		if(ticks-prevTimeStamp>=10){  
 			if(renderOption==RENDER_GAME){
-				//Log.d(this.TAG, "game tick with time = "  + time);
 				time++;
 				box.UpdateState();
 			}else{
@@ -316,7 +322,7 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 		thread.setPaused(true);
 		box = new Box(box.getW(),box.getH());
 		thread.setPaused(false);
-}
+	}
 	
 	public void PauseGame(){
 		thread.setPaused(true);
@@ -338,9 +344,9 @@ public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 			box.setAy(dy);
 		}
 	}
-	
-	public void SetCirclesFilling(boolean fill){
-		
+
+	public void SetFilling(boolean fillCircles) {
+		renderBallsOption = fillCircles ? RENDER_BALLS_FILL : RENDER_BALLS_NO_FILL;
 	}
 
 }

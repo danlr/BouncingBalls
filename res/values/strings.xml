@@ -9,5 +9,5 @@
 	<string name="gravity_on">Use gravity</string>
 	<string name="gravity_off">No gravity</string>
 	<string name="fillCircles_on">Fill balls</string>
-    <string name="fillCircles_off">Empty balls</string>
+    <string name="fillCircles_off">No fill</string>
 </resources>

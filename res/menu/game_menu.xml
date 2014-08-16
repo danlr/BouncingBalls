@@ -14,7 +14,6 @@
           android:title="@string/gravity_on" />
     <item android:id="@+id/fillCircles_onoff" android:checkableBehavior="single"
             android:icon="@drawable/check"
-          android:title="@string/gravity_on" />
-    
+          android:title="@string/fillCircles_off" />
     
 </menu>
