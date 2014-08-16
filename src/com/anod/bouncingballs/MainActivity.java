@@ -48,13 +48,8 @@ public class MainActivity extends Activity implements SensorEventListener {
         int prevHighScore = settings.getInt(HIGH_SCORE_PREFNAME, 0);
 
     	
-        requestWindowFeature(Window.FEATURE_NO_TITLE); //moved to AndroidManifest.xml as 'android:theme="@android:style/Theme.NoTitleBar"'
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
-        //fix current screen orientation
-        //int orientation = getResources().getConfiguration().orientation;
-        //setRequestedOrientation(orientation);
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         
         gameView = new GameView(this,prevHighScore);
         
@@ -110,9 +105,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        //menu.add(0, MENU_QUIT_ID,0, "Quit");
-        //menu.add(0, MENU_PAUSE_ID,0, "Pause");
-        //create menu from XML config
+        
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.game_menu, menu);
         return true;
@@ -123,8 +116,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 	 	//Toast  toast;
         switch(item.getItemId()) {
         case R.id.quit:
-        	//toast = Toast.makeText(getApplicationContext(), "Quit", Toast.LENGTH_SHORT);
-        	//toast.show();
         	gameView.QuitGame();
         	this.finish();
         	
@@ -134,8 +125,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         	gameView.NewGame();
         	return true;
         case R.id.menu_help:
-        	Toast toast = Toast.makeText(getApplicationContext(), R.string.help_message,
-            		Toast.LENGTH_LONG);
+        	Toast toast = Toast.makeText(getApplicationContext(), R.string.help_message, Toast.LENGTH_LONG);
         	toast.show();
         	return true;
         
@@ -150,6 +140,21 @@ public class MainActivity extends Activity implements SensorEventListener {
             	item.setChecked(true);
             	item.setTitle(R.string.gravity_on);
             	mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+            }
+
+        	return true;
+        	
+        case R.id.fillCircles_onoff:
+        	if (item.getTitle() == getString(R.string.fillCircles_on)) {
+        		item.setChecked(false);
+        		item.setTitle(R.string.fillCircles_off);
+        		
+        		gameView.SetCirclesFilling(false);
+        	}
+            else {
+            	item.setChecked(true);
+            	item.setTitle(R.string.fillCircles_on);
+            	gameView.SetCirclesFilling(true);
             }
 
         	return true;

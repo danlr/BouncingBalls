@@ -8,4 +8,6 @@
 	<string name="help_message">Touch the screen and drag the arrow to adjust ball\'s speed!</string>
 	<string name="gravity_on">Use gravity</string>
 	<string name="gravity_off">No gravity</string>
+	<string name="fillCircles_on">Fill balls</string>
+    <string name="fillCircles_off">Empty balls</string>
 </resources>

@@ -14,10 +14,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class GameView  extends SurfaceView implements
-								SurfaceHolder.Callback {
-	
-	
+public class GameView  extends SurfaceView implements SurfaceHolder.Callback {
 	private static final String TAG = GameView.class.getSimpleName();
 	
 	public static final int RENDER_GAME = 1;
@@ -254,13 +251,6 @@ public class GameView  extends SurfaceView implements
 			
 			box.Render(canvas); 
 			
-			//p.setColor(Color.RED);
-			//p.setTextSize(20);
-			
-			
-			//p.setColor(Color.GREEN);
-			//String statText = "High score:" + prevHighScore;
-			//canvas.drawText(statText, 15, 60, p);
 	}
 	
 	/**
@@ -347,6 +337,10 @@ public class GameView  extends SurfaceView implements
 			box.setAx(dx);
 			box.setAy(dy);
 		}
+	}
+	
+	public void SetCirclesFilling(boolean fill){
+		
 	}
 
 }
